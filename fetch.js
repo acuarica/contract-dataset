@@ -11,57 +11,68 @@ const shortaddr = addr => `${addr.slice(0, 6)}..${addr.slice(-4)}`;
 async function fetchCode(provider, address, name) {
 	const path = `.${name}/${address}.bytecode`;
 	const code = await provider.getCode(address);
-	fs.writeFileSync(path, code, 'utf8');
+	fs.writeFile(path, code, 'utf8', err => {
+		if (err) console.error(`Error while writing ${c.yellow(path)}`, err);
+	});
 }
 
 async function txs(provider, blockNumber, name, db) {
 	const info = (address, txHash) => console.info(c.magenta(shortaddr(address)), txHash);
 
-	const path = `.${name}/${blockNumber}.json`;
-
-	process.stdout.write(`${c.dim('[info]')} Block ${c.cyan(blockNumber)}`);
-	try {
-		const contracts = JSON.parse(fs.readFileSync(path, 'utf8'));
+	process.stdout.write(`\uD83D\uDCE6 ${c.cyan(blockNumber)}`);
+	const row = await db.get('SELECT txs FROM blocks WHERE number = ?', blockNumber);
+	if (row) {
+		console.info(` ${row.txs} txs`, c.dim('[cached]'));
+		const contracts = await db.all('SELECT address, tx FROM contracts WHERE number = ?', blockNumber);
 		contracts.forEach(({ address, txHash }) => info(address, c.dim(txHash)));
-		console.info();
-		await db.run('INSERT INTO blocks(number, contracts) VALUES (:number, :contracts)', {
-			':number': blockNumber,
-			':contracts': contracts.length,
-		});
-	
-	} catch (err) {
+	} else {
 		const block = await provider.getBlock(blockNumber);
-		console.info(` (${block.transactions.length} transactions)`);
-		const contracts = [];
-		for (const txHash of block.transactions) {
-			const tx = await provider.getTransaction(txHash);
-			const receipt = await provider.getTransactionReceipt(txHash);
-			if (!tx.to && receipt.contractAddress) {
-				const address = receipt.contractAddress;
-				info(address, txHash);
-				await fetchCode(provider, address, name);
-				contracts.push({ address, txHash });
-			}
-		}
+		console.info(` ${block.transactions.length} txs`);
 
-		await db.run('INSERT INTO blocks(number, contracts) VALUES (:number, :contracts)', {
+		await Promise.all(block.transactions
+			.map(txHash => Promise
+				.all([provider.getTransaction(txHash), provider.getTransactionReceipt(txHash)])
+				.then(([tx, receipt]) => {
+					if (!tx.to && receipt.contractAddress) {
+						const address = receipt.contractAddress;
+						info(address, txHash);
+						void fetchCode(provider, address, name);
+						void db.run('INSERT INTO contracts(number, address, tx) VALUES (:number, :address, :tx)', {
+							':number': blockNumber,
+							':address': address,
+							':tx': txHash,
+						});
+					}
+				})));
+
+		await db.run('INSERT INTO blocks(number, txs) VALUES (:number, :txs)', {
 			':number': blockNumber,
-			':contracts': contracts.length,
+			':txs': block.transactions.length,
 		});
-		fs.writeFile(path, JSON.stringify(contracts, null, 2), 'utf8', err => {
-			if (err) throw err;
-		});
+		// for (const txHash of block.transactions) {
+		// 	const [tx, receipt] = await Promise.all([provider.getTransaction(txHash), provider.getTransactionReceipt(txHash)]);
+		// 	// const receipt = await provider.getTransactionReceipt(txHash);
+		// 	if (!tx.to && receipt.contractAddress) {
+		// 		const address = receipt.contractAddress;
+		// 		info(address, txHash);
+		// 		await fetchCode(provider, address, name);
+		// 		await db.run('INSERT INTO contracts(number, address, tx) VALUES (:number, :address, :tx)', {
+		// 			':number': blockNumber,
+		// 			':address': address,
+		// 			':tx': txHash,
+		// 		});
+		// 		contracts.push({ address, txHash });
+		// 	}
+		// }
+
+		// fs.writeFile(path, JSON.stringify(contracts, null, 2), 'utf8', err => {
+		// 	if (err) throw err;
+		// });
 	}
 }
 
 async function main() {
 	const info = (message, ...optionalParams) => console.info(c.dim('[info]'), message, ...optionalParams);
-
-    const db = await open({
-        filename: 'blocks.sqlite',
-        driver: sqlite3.Database
-    });
-    await db.exec('CREATE TABLE IF NOT EXISTS blocks (number INTEGER PRIMARY KEY ON CONFLICT REPLACE, contracts INTEGER NOT NULL) STRICT');
 
 	const url = 'http://127.0.0.1:8545';
 	info('Connecting to', c.blue(url), '...');
@@ -70,11 +81,22 @@ async function main() {
 	const network = await provider.getNetwork();
 	const latestBlock = await provider.getBlockNumber()
 
-	info('Network', c.blue(network.name), `(${c.yellow(network.chainId)})`, 'at block', c.green(latestBlock));
+	info('Network', c.blue(network.name), `(${c.yellow(network.chainId)})`, 'at \uD83D\uDCE6 block', c.green(latestBlock));
 
-	// 2657991
+	const dbname = `${network.name}.sqlite`;
+	info('Opening db', c.blue(dbname));
+	const db = await open({
+		filename: dbname,
+		driver: sqlite3.Database
+	});
+	await db.exec('CREATE TABLE IF NOT EXISTS blocks (number INTEGER PRIMARY KEY, txs INTEGER NOT NULL) STRICT');
+	await db.exec('CREATE TABLE IF NOT EXISTS contracts (number INTEGER NOT NULL, address TEXT PRIMARY KEY, tx TEXT NOT NULL) STRICT');
 
-	for (let blockNumber = 1735371; blockNumber <= latestBlock; blockNumber++) {
+	const row = await db.get('SELECT MAX(number) AS number FROM blocks');
+	const startBlock = row.number ? row.number + 1 : 2_000_000;
+	info('Starting from \uD83D\uDCE6 block', c.green(startBlock));
+
+	for (let blockNumber = startBlock; blockNumber <= latestBlock; blockNumber++) {
 		await txs(provider, blockNumber, network.name, db);
 	}
 }
