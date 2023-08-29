@@ -4,6 +4,12 @@
   "main": "index.js",
   "type": "module",
   "license": "MIT",
+  "scripts": {
+    "block-count": "sqlite3 sepolia.sqlite -readonly 'select count(*) from blocks'",
+    "last-blocks": "sqlite3 sepolia.sqlite -readonly 'select number from blocks order by number desc limit 10'",
+    "contract-count": "sqlite3 sepolia.sqlite -readonly 'select count(*) from contracts'",
+    "contracts": "sqlite3 sepolia.sqlite -readonly 'select * from contracts'"
+  },
   "devDependencies": {
     "chalk": "^5.3.0",
     "ethers": "^6.3.0",
