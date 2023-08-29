@@ -6,6 +6,8 @@
   "license": "MIT",
   "devDependencies": {
     "chalk": "^5.3.0",
-    "ethers": "^6.3.0"
+    "ethers": "^6.3.0",
+    "sqlite": "^5.0.1",
+    "sqlite3": "^5.1.6"
   }
 }
