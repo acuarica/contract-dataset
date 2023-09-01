@@ -5,11 +5,11 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "block-count": "sqlite3 sepolia.sqlite -readonly 'select count(*) from blocks'",
-    "last-blocks": "sqlite3 sepolia.sqlite -readonly 'select number from blocks order by number desc limit 10'",
-    "contract-count": "sqlite3 sepolia.sqlite -readonly 'select count(*) from contracts'",
-    "frequent-contracts": "sqlite3 -readonly sepolia.sqlite 'select hash, address, count(address) from contracts group by hash order by count(address) desc limit 20'",
-    "contracts": "sqlite3 sepolia.sqlite -readonly 'select * from contracts'"
+    "block-count": "sqlite3 sepolia.sqlite -readonly -header 'SELECT COUNT(*) FROM blocks'",
+    "last-blocks": "sqlite3 sepolia.sqlite -readonly -header 'SELECT number FROM blocks ORDER BY number DESC LIMIT 20'",
+    "contract-count": "sqlite3 sepolia.sqlite -readonly -header 'SELECT COUNT(*) FROM contracts'",
+    "last-contracts": "sqlite3 sepolia.sqlite -readonly -header 'SELECT * FROM contracts LIMIT 20'",
+    "frequent-contracts": "sqlite3 -readonly -header sepolia.sqlite 'SELECT hash AS \"Contract Hash\", address AS \"Witness Address\", COUNT(address) AS \"#Address\", size FROM contracts GROUP BY hash ORDER BY COUNT(address) DESC LIMIT 20'"
   },
   "devDependencies": {
     "chalk": "^5.3.0",
