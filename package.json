@@ -8,6 +8,7 @@
     "block-count": "sqlite3 sepolia.sqlite -readonly 'select count(*) from blocks'",
     "last-blocks": "sqlite3 sepolia.sqlite -readonly 'select number from blocks order by number desc limit 10'",
     "contract-count": "sqlite3 sepolia.sqlite -readonly 'select count(*) from contracts'",
+    "frequent-contracts": "sqlite3 -readonly sepolia.sqlite 'select hash, address, count(address) from contracts group by hash order by count(address) desc limit 20'",
     "contracts": "sqlite3 sepolia.sqlite -readonly 'select * from contracts'"
   },
   "devDependencies": {
