@@ -1,4 +1,4 @@
 /node_modules/
 /.sepolia/
 /sepolia.sqlite
-/sepolia-contract-addresses.json
+/sepolia-contract-addresses.csv
