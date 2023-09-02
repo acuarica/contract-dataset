@@ -27,9 +27,10 @@ async function fetchCode(provider, db, blockNumber, txHash, address) {
 
     await Promise.all([
         writeFile(path.join(`.${name}`, hash.slice(2, 4), hash + '.bytecode'), content, 'utf8'),
-        db.run('INSERT INTO contracts (address, tx, hash, size) VALUES ($address, $tx, $hash, $size)', {
+        db.run('INSERT INTO contracts (address, txhash, number, hash, size) VALUES ($address, $txhash, $number, $hash, $size)', {
             $address: address,
-            $tx: txHash,
+            $txhash: txHash,
+            $number: blockNumber,
             $hash: hash,
             $size: content.length,
         })
@@ -53,7 +54,7 @@ async function main() {
     });
 
     await db.exec('CREATE TABLE IF NOT EXISTS blocks (number INTEGER PRIMARY KEY ON CONFLICT REPLACE, txs INTEGER NOT NULL, addresses TEXT NOT NULL, seen INTEGER) STRICT');
-    await db.exec('CREATE TABLE IF NOT EXISTS contracts (address TEXT PRIMARY KEY ON CONFLICT REPLACE, tx TEXT NOT NULL, hash TEXT NOT NULL, size INTEGER NOT NULL) STRICT');
+    await db.exec('CREATE TABLE IF NOT EXISTS contracts (address TEXT PRIMARY KEY ON CONFLICT REPLACE, txhash TEXT NOT NULL, number INTEGER NOT NULL, hash TEXT NOT NULL, size INTEGER NOT NULL) STRICT');
 
     info(`Creating directory prefixes under ${c.magenta('.' + name)}`);
     for (let i = 0; i < 256; i++) {
