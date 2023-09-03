@@ -8,10 +8,10 @@
     "block-count": "sqlite3 sepolia.sqlite -readonly -header 'SELECT COUNT(*) FROM blocks'",
     "last-blocks": "sqlite3 sepolia.sqlite -readonly -header 'SELECT number FROM blocks ORDER BY number DESC LIMIT 20'",
     "contract-count": "sqlite3 sepolia.sqlite -readonly -header 'SELECT COUNT(*) FROM contracts'",
-    "last-contracts": "sqlite3 sepolia.sqlite -readonly -header 'SELECT * FROM contracts LIMIT 20'",
+    "last-contracts": "sqlite3 sepolia.sqlite -readonly -header 'SELECT * FROM contracts ORDER BY number DESC LIMIT 20'",
     "frequent-contracts": "sqlite3 -readonly -header sepolia.sqlite 'SELECT hash AS \"Contract Hash\", address AS \"Witness Address\", COUNT(address) AS \"#Address\", size FROM contracts GROUP BY hash ORDER BY COUNT(address) DESC LIMIT 20'",
-    "contract-addresses": "sqlite3 -readonly -csv sepolia.sqlite 'SELECT address, hash FROM contracts' | split -d -l 200000 - sepolia-contract-addresses.csv",
-    "join-contract-addresses": "cat sepolia-contract-addresses.csv* > sepolia-contract-addresses.csv"
+    "contract-addresses": "sqlite3 -readonly -csv sepolia.sqlite 'SELECT address, hash FROM contracts' | split -d -l 200000 - .data/sepolia-contract-addresses.csv",
+    "join-contract-addresses": "cat .data/sepolia-contract-addresses.csv* > sepolia-contract-addresses.csv"
   },
   "devDependencies": {
     "chalk": "^5.3.0",
