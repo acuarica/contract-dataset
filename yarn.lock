@@ -648,6 +648,11 @@ set-blocking@^2.0.0:
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
 
+sevm@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/sevm/-/sevm-0.5.3.tgz#0bb4b1349f196a960fe8443feb3e1380b628323a"
+  integrity sha512-KA9kmu70EHaWCyZBTTEuCWJsAC1kuJb1BfpP6dWYgcYzc1wOK/IdW/t1M2dFxFPbeqj2hcGUFS/2Z7qIlbAIKg==
+
 signal-exit@^3.0.0, signal-exit@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
