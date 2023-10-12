@@ -15,11 +15,11 @@ const info = (message, ...optionalParams) => console.info(c.dim('[info]'), messa
 
 /**
  * 
- * @param {Provider} provider 
- * @param {sqlite3.Database} db 
- * @param {number} blockNumber 
- * @param {string} txHash 
- * @param {string} address 
+ * @param {Provider} provider
+ * @param {sqlite3.Database} db
+ * @param {number} blockNumber
+ * @param {string} txHash
+ * @param {string} address
  */
 async function fetchCode(provider, db, blockNumber, txHash, address) {
     const content = await provider.getCode(address);
