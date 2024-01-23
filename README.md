@@ -1,4 +1,4 @@
-# Sepolia Contracts Dataset
+# Contracts Dataset
 
 ## Set up local node
 
