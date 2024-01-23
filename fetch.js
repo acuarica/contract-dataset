@@ -71,7 +71,6 @@ async function main() {
     for (let blockNumber = startBlock; blockNumber <= latestBlock; blockNumber++) {
         bar.tick();
 
-        /** @type {{transactionHash: string, contractAddress?: string}[]} */
         const txs = await provider.getBlockReceipts(blockNumber);
         const addresses = [];
         for (const tx of txs) {

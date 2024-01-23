@@ -39,7 +39,7 @@ export class Provider {
      * Returns the receipts of a given block.
      * 
      * @param {number} blockNumber 
-     * @returns 
+     * @returns {Promise<{transactionHash: string, contractAddress?: string}[]>}
      */
     getBlockReceipts(blockNumber) {
         return this.post('eth_getBlockReceipts', [blockNumber]);
@@ -51,7 +51,8 @@ export class Provider {
      * See also https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getcode.
      * 
      * @param {string} address 20-byte account address.
-     * @param {BlockTag} blockNumber The block number or tag at which to make the request. See also https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block.
+     * @param {BlockTag} blockNumber The block number or tag at which to make the request.
+     * See also https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block.
      * @returns {Promise<string>}
      */
     getCode(address, blockNumber = 'latest') {
@@ -72,11 +73,14 @@ export class Provider {
     /**
      * Sends a JSON-RPC `POST` request to the provider.
      * 
+     * @template T
      * @param {'eth_blockNumber'|'eth_chainId'|'eth_getBlockReceipts'|'eth_getCode'|'web3_clientVersion'} method 
-     * @param {any[]} params 
-     * @returns {Promise<any>} The `result` of the request.
+     * @param {unknown[]} params 
+     * @returns {Promise<T>} The `result` of the request.
      */
     async post(method, params) {
+        /** @typedef {{jsonrpc: string, id: number, error: unknown, result: unknown}} JsonRpcResponse */
+
         const id = this._id++;
         const resp = await fetch(this.url, {
             method: 'POST',
@@ -90,9 +94,10 @@ export class Provider {
                 id,
             }),
         });
-        const json = await resp.json();
-        if (!(resp.status === 200 && json.jsonrpc === '2.0' && json.id === id && json.error === undefined)) throw new Error(`Invalid response: ${JSON.stringify(json)}`);
-        return json.result;
-    }
 
+        const json = /** @type {JsonRpcResponse} */(await resp.json());
+        if (resp.status === 200 && json.jsonrpc === '2.0' && json.id === id && json.error === undefined)
+            return /** @type {T} */ (json.result);
+        throw new Error(`Invalid JSON-RPC response: ${JSON.stringify(json)}`);
+    }
 }
