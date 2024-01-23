@@ -1,5 +1,10 @@
 # Contracts Dataset
 
+## Etherscan
+
+Contract addresses index needs to be manually downloaded from
+<https://etherscan.io/exportData?type=open-source-contract-codes>.
+
 ## Set up local node
 
 With Erigon
