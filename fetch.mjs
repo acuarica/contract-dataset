@@ -16,16 +16,17 @@ const cyan = text => `\x1b[36m${text}\x1b[0m`;
 const info = (message, ...optionalParams) => console.info(dim('[info]'), message, ...optionalParams);
 
 const {
-    ALCHEMY_KEY = undefined,
+    ALCHEMY_KEY = null,
     INFURA_KEY = '84842078b09946638c03157f83405213',
 } = process.env;
 
 const provider = new class {
     providers = [
         new Provider('https://cloudflare-eth.com/'),
-        new Provider(`https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`),
+        ALCHEMY_KEY === null ? null : new Provider(`https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}`),
         new Provider(`https://mainnet.infura.io/v3/${INFURA_KEY}`),
-    ];
+    ].filter(p => p !== null);
+
     current = 0;
 
     get _() {
@@ -42,15 +43,21 @@ async function main() {
         .map(entry => entry.trimEnd().replace(/"/g, '').split(','))
     info(contracts.length, 'contracts');
 
+    info(`Using ${provider.providers.length} backend providers`);
+    for (const backend of provider.providers) {
+        info(`  backend ${blue(await backend.clientVersion())}`);
+    }
+
     const chainId = (await provider._.chainId()).toString();
 
     info(`Chain ID ${blue(chainId)} at block \uD83D\uDCE6 ${await provider._.blockNumber()}`);
 
     mkdirSync(chainId, { recursive: true });
 
+    let index = 1;
     for (const [address, name] of contracts) {
         const filePath = path.join(chainId, `${name}-${address}.bytecode`);
-        process.stdout.write(`Fetching contract ${cyan(name)} ${magenta(address)}`);
+        process.stdout.write(`Fetching contract #${index++} ${cyan(name)} ${magenta(address)}`);
         if (existsSync(filePath)) {
             console.info(green(' \u2713'));
         } else {
