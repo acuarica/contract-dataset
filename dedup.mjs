@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { createHash } from "crypto";
-import { readFileSync } from "fs";
-import path from "path";
+import { createHash } from 'crypto';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 function main() {
     /** @type {[string, string][]} */
