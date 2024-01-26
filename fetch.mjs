@@ -83,7 +83,7 @@ async function main() {
 
     let index = 1;
     for (const [address, name] of contracts) {
-        process.stdout.write(`Fetching contract #${index++} ${cyan(name)} ${magenta(address)}`);
+        process.stdout.write(`Contract ${dim(`#${index++}`)} ${cyan(name)} ${magenta(address)}`);
 
         const basePath = path.join(chainId, `${name}-${address}`);
         const filePath = `${basePath}.bytecode`;
@@ -97,7 +97,7 @@ async function main() {
         }
 
         const abiPath = `${basePath}.abi.json`;
-        process.stdout.write(' abi');
+        process.stdout.write(' {}');
         if (existsSync(abiPath)) {
             process.stdout.write(green('\u2713'));
         } else {
