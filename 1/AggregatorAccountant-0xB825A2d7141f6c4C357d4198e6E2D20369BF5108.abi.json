@@ -1,0 +1,693 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_feeManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_feeRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultManagement",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultPerformance",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultRefund",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultMax",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "AG_ALREADY_INITIALIZED",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "AG_INVALID_CONFIGURATION",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "clone",
+        "type": "address"
+      }
+    ],
+    "name": "Cloned",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rewards",
+        "type": "uint256"
+      }
+    ],
+    "name": "DistributeRewards",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "feeManager",
+        "type": "address"
+      }
+    ],
+    "name": "NewFeeManager",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "futureFeeManager",
+        "type": "address"
+      }
+    ],
+    "name": "SetFutureFeeManager",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "vault",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "strategy",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "managementFee",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "performanceFee",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "refundRatio",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "maxFee",
+            "type": "uint16"
+          },
+          {
+            "internalType": "bool",
+            "name": "custom",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct AggregatorAccountant.Fee",
+        "name": "customConfig",
+        "type": "tuple"
+      }
+    ],
+    "name": "UpdateCustomFeeConfig",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "managementFee",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "performanceFee",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "refundRatio",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "maxFee",
+            "type": "uint16"
+          },
+          {
+            "internalType": "bool",
+            "name": "custom",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct AggregatorAccountant.Fee",
+        "name": "defaultFeeConfig",
+        "type": "tuple"
+      }
+    ],
+    "name": "UpdateDefaultFeeConfig",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "oldFeeRecipient",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newFeeRecipient",
+        "type": "address"
+      }
+    ],
+    "name": "UpdateFeeRecipient",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "vault",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum AggregatorAccountant.ChangeType",
+        "name": "change",
+        "type": "uint8"
+      }
+    ],
+    "name": "VaultChanged",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "acceptFeeManager",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vault",
+        "type": "address"
+      }
+    ],
+    "name": "addVault",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_feeManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_feeRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultManagement",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultPerformance",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultRefund",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultMax",
+        "type": "uint16"
+      }
+    ],
+    "name": "clone",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "newAccountant",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "defaultConfig",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "managementFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "performanceFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "refundRatio",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "maxFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "bool",
+        "name": "custom",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "distribute",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeManager",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeRecipient",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "fees",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "managementFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "performanceFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "refundRatio",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "maxFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "bool",
+        "name": "custom",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "futureFeeManager",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_feeManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_feeRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultManagement",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultPerformance",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultRefund",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultMax",
+        "type": "uint16"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "managementFeeThreshold",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "performanceFeeThreshold",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vault",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_strategy",
+        "type": "address"
+      }
+    ],
+    "name": "removeCustomConfig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vault",
+        "type": "address"
+      }
+    ],
+    "name": "removeVault",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_strategy",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_gain",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_loss",
+        "type": "uint256"
+      }
+    ],
+    "name": "report",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vault",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_strategy",
+        "type": "address"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_customManagement",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_customPerformance",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_customRefund",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_customMax",
+        "type": "uint16"
+      }
+    ],
+    "name": "setCustomConfig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_newFeeRecipient",
+        "type": "address"
+      }
+    ],
+    "name": "setFeeRecipient",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_futureFeeManager",
+        "type": "address"
+      }
+    ],
+    "name": "setFutureFeeManager",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_defaultManagement",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultPerformance",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultRefund",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_defaultMax",
+        "type": "uint16"
+      }
+    ],
+    "name": "updateDefaultConfig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "vaults",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vault",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdrawUnderlying",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

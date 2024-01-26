@@ -1,0 +1,15 @@
+[
+  {
+    "inputs": [],
+    "name": "wallSecure",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  }
+]

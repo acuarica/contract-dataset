@@ -1,0 +1,106 @@
+[
+  {
+    "stateMutability": "payable",
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "controller",
+        "type": "address"
+      },
+      {
+        "name": "weth",
+        "type": "address"
+      },
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "collateral",
+        "type": "address"
+      },
+      {
+        "name": "stablecoin",
+        "type": "address"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "create_loan_extended",
+    "inputs": [
+      {
+        "name": "collateral_amount",
+        "type": "uint256"
+      },
+      {
+        "name": "debt",
+        "type": "uint256"
+      },
+      {
+        "name": "N",
+        "type": "uint256"
+      },
+      {
+        "name": "callbacker",
+        "type": "address"
+      },
+      {
+        "name": "callback_args",
+        "type": "uint256[]"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "repay_extended",
+    "inputs": [
+      {
+        "name": "callbacker",
+        "type": "address"
+      },
+      {
+        "name": "callback_args",
+        "type": "uint256[]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "state",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[4]"
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "health",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "int256"
+      }
+    ]
+  },
+  {
+    "stateMutability": "payable",
+    "type": "fallback"
+  }
+]

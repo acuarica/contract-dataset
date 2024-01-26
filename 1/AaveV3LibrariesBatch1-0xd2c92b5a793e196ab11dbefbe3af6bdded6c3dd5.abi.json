@@ -1,0 +1,62 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "getLibrariesReport",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "borrowLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "bridgeLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "configuratorLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "eModeLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "flashLoanLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidationLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "poolLogic",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "supplyLogic",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibrariesReport",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

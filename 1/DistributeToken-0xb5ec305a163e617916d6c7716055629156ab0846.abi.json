@@ -1,0 +1,62 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct DistributeToken.Details[]",
+        "name": "details",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "transferEth",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct DistributeToken.TokenDetails[]",
+        "name": "details",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "transferToken",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]

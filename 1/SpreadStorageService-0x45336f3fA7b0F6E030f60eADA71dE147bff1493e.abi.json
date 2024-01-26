@@ -1,0 +1,79 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timeWeightedNotionalPayFixed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lastUpdateTimePayFixed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timeWeightedNotionalReceiveFixed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lastUpdateTimeReceiveFixed",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "storageId",
+        "type": "uint256"
+      }
+    ],
+    "name": "SpreadTimeWeightedNotionalChanged",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "timeWeightedNotionalPayFixed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastUpdateTimePayFixed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timeWeightedNotionalReceiveFixed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastUpdateTimeReceiveFixed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum SpreadStorageLibs.StorageId",
+            "name": "storageId",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct SpreadTypes.TimeWeightedNotionalMemory[]",
+        "name": "timeWeightedNotionalMemories",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "updateTimeWeightedNotional",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

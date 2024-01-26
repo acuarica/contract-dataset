@@ -1,0 +1,678 @@
+[
+  {
+    "inputs": [],
+    "name": "LV_AMOUNT_NOT_GT_0",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LV_INVALID_CONFIGURATION",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LV_REPAY_FAILED",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LV_REQUIRE_MIN_AMOUNT",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LV_SUPPLY_FAILED",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LV_SUPPLY_NOT_ALLOWED",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_leverage",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_borrowAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_collateralAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_silo",
+        "type": "address"
+      },
+      {
+        "internalType": "enum IBaseLeverage.FlashLoanType",
+        "name": "_flashLoanType",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "address[9]",
+                "name": "routes",
+                "type": "address[9]"
+              },
+              {
+                "internalType": "uint256[3][4]",
+                "name": "routeParams",
+                "type": "uint256[3][4]"
+              },
+              {
+                "internalType": "enum IBaseLeverage.SwapType",
+                "name": "swapType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "poolCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "swapFrom",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "swapTo",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+            "name": "paths",
+            "type": "tuple[3]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address[9]",
+                "name": "routes",
+                "type": "address[9]"
+              },
+              {
+                "internalType": "uint256[3][4]",
+                "name": "routeParams",
+                "type": "uint256[3][4]"
+              },
+              {
+                "internalType": "enum IBaseLeverage.SwapType",
+                "name": "swapType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "poolCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "swapFrom",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "swapTo",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+            "name": "reversePaths",
+            "type": "tuple[3]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pathLength",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBaseLeverage.SwapInfo",
+        "name": "_swapInfo",
+        "type": "tuple"
+      }
+    ],
+    "name": "enterPositionWithFlashloan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "assets",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "amounts",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "premiums",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "params",
+        "type": "bytes"
+      }
+    ],
+    "name": "executeOperation",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20[]",
+        "name": "tokens",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "amounts",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "feeAmounts",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "userData",
+        "type": "bytes"
+      }
+    ],
+    "name": "receiveFlashLoan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_repayAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_requiredAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_borrowAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_collateralAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_silo",
+        "type": "address"
+      },
+      {
+        "internalType": "enum IBaseLeverage.FlashLoanType",
+        "name": "_flashLoanType",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "address[9]",
+                "name": "routes",
+                "type": "address[9]"
+              },
+              {
+                "internalType": "uint256[3][4]",
+                "name": "routeParams",
+                "type": "uint256[3][4]"
+              },
+              {
+                "internalType": "enum IBaseLeverage.SwapType",
+                "name": "swapType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "poolCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "swapFrom",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "swapTo",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+            "name": "paths",
+            "type": "tuple[3]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address[9]",
+                "name": "routes",
+                "type": "address[9]"
+              },
+              {
+                "internalType": "uint256[3][4]",
+                "name": "routeParams",
+                "type": "uint256[3][4]"
+              },
+              {
+                "internalType": "enum IBaseLeverage.SwapType",
+                "name": "swapType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "poolCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "swapFrom",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "swapTo",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+            "name": "reversePaths",
+            "type": "tuple[3]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pathLength",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBaseLeverage.SwapInfo",
+        "name": "_swapInfo",
+        "type": "tuple"
+      }
+    ],
+    "name": "withdrawWithFlashloan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_borrowAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_zappingAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_collateralAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_borrowAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_silo",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address[9]",
+            "name": "routes",
+            "type": "address[9]"
+          },
+          {
+            "internalType": "uint256[3][4]",
+            "name": "routeParams",
+            "type": "uint256[3][4]"
+          },
+          {
+            "internalType": "enum IBaseLeverage.SwapType",
+            "name": "swapType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "poolCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "swapFrom",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "swapTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "outAmount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+        "name": "_zapPaths",
+        "type": "tuple[3]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_zapPathLength",
+        "type": "uint256"
+      }
+    ],
+    "name": "zapDeposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_principal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_leverage",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_zappingAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_collateralAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_borrowAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_silo",
+        "type": "address"
+      },
+      {
+        "internalType": "enum IBaseLeverage.FlashLoanType",
+        "name": "_flashLoanType",
+        "type": "uint8"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address[9]",
+            "name": "routes",
+            "type": "address[9]"
+          },
+          {
+            "internalType": "uint256[3][4]",
+            "name": "routeParams",
+            "type": "uint256[3][4]"
+          },
+          {
+            "internalType": "enum IBaseLeverage.SwapType",
+            "name": "swapType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "poolCount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "swapFrom",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "swapTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "outAmount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+        "name": "_zapPaths",
+        "type": "tuple[3]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_zapPathLength",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "address[9]",
+                "name": "routes",
+                "type": "address[9]"
+              },
+              {
+                "internalType": "uint256[3][4]",
+                "name": "routeParams",
+                "type": "uint256[3][4]"
+              },
+              {
+                "internalType": "enum IBaseLeverage.SwapType",
+                "name": "swapType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "poolCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "swapFrom",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "swapTo",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+            "name": "paths",
+            "type": "tuple[3]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address[9]",
+                "name": "routes",
+                "type": "address[9]"
+              },
+              {
+                "internalType": "uint256[3][4]",
+                "name": "routeParams",
+                "type": "uint256[3][4]"
+              },
+              {
+                "internalType": "enum IBaseLeverage.SwapType",
+                "name": "swapType",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "poolCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "swapFrom",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "swapTo",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IBaseLeverage.MultipSwapPath[3]",
+            "name": "reversePaths",
+            "type": "tuple[3]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pathLength",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBaseLeverage.SwapInfo",
+        "name": "_swapInfo",
+        "type": "tuple"
+      }
+    ],
+    "name": "zapLeverageWithFlashloan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

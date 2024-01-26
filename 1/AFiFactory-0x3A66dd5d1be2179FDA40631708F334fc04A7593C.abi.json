@@ -1,0 +1,606 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_aTokenImplementation",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "afiContract",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "utoken",
+        "type": "address"
+      }
+    ],
+    "name": "AddUnderlyingTokens",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferStarted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      }
+    ],
+    "name": "TokenCreated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "aFiProducts",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "aTokenImplementation",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "acceptOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "aFiContract",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "order",
+        "type": "uint256"
+      }
+    ],
+    "name": "afiContractInitUpdate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "afiProductsCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allUnderlyingTokens",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "allUnderlyingTokensLength",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_symbol",
+        "type": "string"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_teamWallets",
+        "type": "address[]"
+      },
+      {
+        "internalType": "bool",
+        "name": "_isPassiveRebalanced",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "_isActiveRebalanced",
+        "type": "bool"
+      },
+      {
+        "internalType": "contract IAFiStorage",
+        "name": "_aFiStorage",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IPassiveRebal",
+        "name": "_rebalContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_aFiManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_nonOverlappingITokens",
+        "type": "address[]"
+      }
+    ],
+    "name": "createAToken",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "aTokenAddress",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address[]",
+            "name": "_depositStableCoin",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_depositCoinOracle",
+            "type": "address[]"
+          },
+          {
+            "internalType": "bytes",
+            "name": "underlyingData",
+            "type": "bytes"
+          },
+          {
+            "internalType": "address",
+            "name": "_apr",
+            "type": "address"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_compound",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_aaveToken",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_priceOracles",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "_underlyingTokensProportion",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "_dToken",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_typeOfProduct",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IAFi.PoolsData",
+        "name": "pooldata",
+        "type": "tuple"
+      }
+    ],
+    "name": "encodePoolData",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address[]",
+            "name": "_underlyingTokens",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_underlyingUniPoolToken",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_underlyingUniPool",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "_underlyingPoolWithWETH",
+            "type": "address[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address[]",
+                "name": "_pools",
+                "type": "address[]"
+              }
+            ],
+            "internalType": "struct IAFi.StablePools[]",
+            "name": "stablePools",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "stableWethPool",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct IAFi.UnderlyingData",
+        "name": "uData",
+        "type": "tuple"
+      }
+    ],
+    "name": "encodeUnderlyingData",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "aFiContract",
+        "type": "address"
+      }
+    ],
+    "name": "getAFiInitStatus",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "afiContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "afiStorage",
+        "type": "address"
+      }
+    ],
+    "name": "getPricePerFullShare",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserATokenList",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "afiContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "hasUserInvestedAlready",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isATokenPresent",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isUnderlyingTokenPresent",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pendingOwner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "afiContract",
+        "type": "address"
+      }
+    ],
+    "name": "setIfUserInvesting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "afiContract",
+        "type": "address"
+      }
+    ],
+    "name": "withdrawAndResetInvestmentStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

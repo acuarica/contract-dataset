@@ -1,0 +1,668 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_erc20",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_rewardMintAddress",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "Model",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "ValidAfter",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "NotValidAfer",
+        "type": "uint256"
+      }
+    ],
+    "name": "DepositModelChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "User",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "DepositIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "DepositValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "DepositNew",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_depositIndex",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_addAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "addFundsToDeposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_deposit",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_monthCount",
+        "type": "uint256"
+      }
+    ],
+    "name": "calcInterests",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_newValues",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "increment",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_depositIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimInterests",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "claimedAmount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_newDeposit",
+        "type": "tuple"
+      }
+    ],
+    "name": "deposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "depositModels",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "validAfter",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "notValidAfter",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "modelAddress",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "deposits",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "startDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "body",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "depositModelIndex",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_modelIndex",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_notValidAfter",
+        "type": "uint256"
+      }
+    ],
+    "name": "editModelEndDate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getUserDepositByIndex",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getUserDepositByIndex2",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct DepositInfo",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserDeposits",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserDeposits2",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserDepositsCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "validAfter",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notValidAfter",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "modelAddress",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct StakingManager.DepositModel",
+        "name": "_newModel",
+        "type": "tuple"
+      }
+    ],
+    "name": "modelRegister",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardMintAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "stakedToken",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_depositIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "withdrawAmount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_depositIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdrawEmergency",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "withdrawAmount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

@@ -1,0 +1,872 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_multisig",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IVotingPowerAggregator",
+        "name": "_votingPowerAggregator",
+        "type": "address"
+      },
+      {
+        "internalType": "contract ITierer",
+        "name": "_tierer",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "MultisigSunset",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "actual",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "expected",
+        "type": "address"
+      }
+    ],
+    "name": "NotAuthorized",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "MultisigSunset",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "originalSunset",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newSunset",
+        "type": "uint256"
+      }
+    ],
+    "name": "MultisigSunsetAtUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint16",
+        "name": "id",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "target",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct DataTypes.ProposalAction[]",
+        "name": "actions",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "ProposalCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "ProposalExecuted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DataTypes.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DataTypes.ProposalOutcome",
+        "name": "outcome",
+        "type": "uint8"
+      }
+    ],
+    "name": "ProposalTallied",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "ProposalVetoed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "voter",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DataTypes.Ballot",
+        "name": "vote",
+        "type": "uint8"
+      }
+    ],
+    "name": "VoteCast",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "bGYD",
+    "outputs": [
+      {
+        "internalType": "contract IBoundedERC20WithEMA",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "target",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct DataTypes.ProposalAction[]",
+        "name": "actions",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "createAndExecuteProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "target",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct DataTypes.ProposalAction[]",
+        "name": "actions",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "createProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "executeProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "extensionPeriod",
+        "type": "uint256"
+      }
+    ],
+    "name": "extendMultisigSunsetAt",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "voter",
+        "type": "address"
+      },
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "getBallot",
+    "outputs": [
+      {
+        "internalType": "enum DataTypes.Ballot",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "getCurrentPercentages",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "for_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "against",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "abstain",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "getProposal",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "createdAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "executableAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "votingEndsAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "voteThreshold",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "quorum",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "id",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint8",
+            "name": "actionLevel",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "proposer",
+            "type": "address"
+          },
+          {
+            "internalType": "enum DataTypes.Status",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "target",
+                "type": "address"
+              },
+              {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+              }
+            ],
+            "internalType": "struct DataTypes.ProposalAction[]",
+            "name": "actions",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct DataTypes.Proposal",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "getVoteTotals",
+    "outputs": [
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "vaultAddress",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "votingPower",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct DataTypes.VaultVotingPower[]",
+            "name": "_for",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "vaultAddress",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "votingPower",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct DataTypes.VaultVotingPower[]",
+            "name": "against",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "vaultAddress",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "votingPower",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct DataTypes.VaultVotingPower[]",
+            "name": "abstentions",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct DataTypes.VoteTotals",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IBoundedERC20WithEMA",
+        "name": "_bGYD",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "actionLevelThreshold",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "emaThreshold",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minBGYDSupply",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "tierStrategy",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct DataTypes.LimitUpgradeabilityParameters",
+        "name": "_params",
+        "type": "tuple"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "limitUpgradeabilityParams",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "actionLevelThreshold",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "emaThreshold",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minBGYDSupply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "tierStrategy",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "listActiveProposals",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "createdAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "executableAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "votingEndsAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "voteThreshold",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "quorum",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "id",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint8",
+            "name": "actionLevel",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "proposer",
+            "type": "address"
+          },
+          {
+            "internalType": "enum DataTypes.Status",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "target",
+                "type": "address"
+              },
+              {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+              }
+            ],
+            "internalType": "struct DataTypes.ProposalAction[]",
+            "name": "actions",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct DataTypes.Proposal[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "listTimelockedProposals",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "createdAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "executableAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "votingEndsAt",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "voteThreshold",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "quorum",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "id",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint8",
+            "name": "actionLevel",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "proposer",
+            "type": "address"
+          },
+          {
+            "internalType": "enum DataTypes.Status",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "target",
+                "type": "address"
+              },
+              {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+              }
+            ],
+            "internalType": "struct DataTypes.ProposalAction[]",
+            "name": "actions",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct DataTypes.Proposal[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "multisig",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "multisigSunsetAt",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "oneOffExtendMultisigSunsetAt",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "proposalsCount",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "sunsetMultisig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "tallyVote",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tierer",
+    "outputs": [
+      {
+        "internalType": "contract ITierer",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint8",
+            "name": "actionLevelThreshold",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "emaThreshold",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minBGYDSupply",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "tierStrategy",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct DataTypes.LimitUpgradeabilityParameters",
+        "name": "_params",
+        "type": "tuple"
+      }
+    ],
+    "name": "updateLimitUpgradeabilityParams",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      }
+    ],
+    "name": "vetoProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "proposalId",
+        "type": "uint16"
+      },
+      {
+        "internalType": "enum DataTypes.Ballot",
+        "name": "ballot",
+        "type": "uint8"
+      }
+    ],
+    "name": "vote",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "votingPowerAggregator",
+    "outputs": [
+      {
+        "internalType": "contract IVotingPowerAggregator",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

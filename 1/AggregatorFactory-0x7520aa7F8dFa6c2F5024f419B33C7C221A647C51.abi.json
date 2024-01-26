@@ -1,0 +1,189 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract IVaultFactory",
+        "name": "vaultFactory_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IAggregatorDataProvider",
+        "name": "dataProvider_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "AG_INVALID_CONFIGURATION",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newAggregator",
+        "type": "address"
+      }
+    ],
+    "name": "AggregratorCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_managementFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_performanceFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_refundRatio",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_maxFee",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_minTotalIdle",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_profitMaxUnlockTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_accountant",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_asset",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_symbol",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "strategy",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxDebt",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct AggregatorFactory.SiloData[]",
+        "name": "_silos",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "create",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getDataProvider",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IAggregatorDataProvider",
+        "name": "dataProvider_",
+        "type": "address"
+      }
+    ],
+    "name": "setDataProvider",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

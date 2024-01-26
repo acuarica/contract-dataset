@@ -1,0 +1,377 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract IWETH9",
+        "name": "WETH_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract INFTXVaultFactoryV2",
+        "name": "v2NFTXFactory_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract INFTXInventoryStakingV2",
+        "name": "v2Inventory_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IUniswapV2Router02",
+        "name": "sushiRouter_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract INonfungiblePositionManager",
+        "name": "positionManager_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract INFTXVaultFactoryV3",
+        "name": "v3NFTXFactory_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract INFTXInventoryStakingV3",
+        "name": "v3Inventory_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidSignatureLength",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "UnableToSendETH",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "WETH",
+    "outputs": [
+      {
+        "internalType": "contract IWETH9",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "positionManager",
+    "outputs": [
+      {
+        "internalType": "contract INonfungiblePositionManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "rescueTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "sushiRouter",
+    "outputs": [
+      {
+        "internalType": "contract IUniswapV2Router02",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "sushiPair",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lpAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "vTokenV2",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "is1155",
+            "type": "bool"
+          },
+          {
+            "internalType": "bytes",
+            "name": "permitSig",
+            "type": "bytes"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vaultIdV3",
+            "type": "uint256"
+          },
+          {
+            "internalType": "int24",
+            "name": "tickLower",
+            "type": "int24"
+          },
+          {
+            "internalType": "int24",
+            "name": "tickUpper",
+            "type": "int24"
+          },
+          {
+            "internalType": "uint24",
+            "name": "fee",
+            "type": "uint24"
+          },
+          {
+            "internalType": "uint160",
+            "name": "sqrtPriceX96",
+            "type": "uint160"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount0Min",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount1Min",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct MigratorZap.SushiToNFTXAMMParams",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "sushiToNFTXAMM",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "positionId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "v2Inventory",
+    "outputs": [
+      {
+        "internalType": "contract INFTXInventoryStakingV2",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "vaultIdV2",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "shares",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "is1155",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "vaultIdV3",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minWethToReceive",
+        "type": "uint256"
+      }
+    ],
+    "name": "v2InventoryToXNFT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "xNFTId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "v2NFTXFactory",
+    "outputs": [
+      {
+        "internalType": "contract INFTXVaultFactoryV2",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "vTokenV2",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "vTokenV2Balance",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "is1155",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "vaultIdV3",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minWethToReceive",
+        "type": "uint256"
+      }
+    ],
+    "name": "v2VaultToXNFT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "xNFTId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "v3Inventory",
+    "outputs": [
+      {
+        "internalType": "contract INFTXInventoryStakingV3",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "v3NFTXFactory",
+    "outputs": [
+      {
+        "internalType": "contract INFTXVaultFactoryV3",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

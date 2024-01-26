@@ -1,0 +1,17 @@
+[
+  {
+    "inputs": [],
+    "name": "SW_MISMATCH_RETURNED_AMOUNT",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SW_PATH_LENGTH_INVALID",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SW_PATH_TOKEN_INVALID",
+    "type": "error"
+  }
+]

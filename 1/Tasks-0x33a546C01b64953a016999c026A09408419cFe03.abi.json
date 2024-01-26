@@ -1,0 +1,1738 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "ApplicationDoesNotExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ApplicationNotAccepted",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ArrayLargerThanSupported",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Disabled",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidTimestamp",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "JudgementNone",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ManualBudgetIncreaseRequired",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotDisabled",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotDisabler",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotExecutor",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotManager",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotYourApplication",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PointlessOperation",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestAlreadyAccepted",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestAlreadyExecuted",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestDoesNotExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RequestNotAccepted",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RewardAboveBudget",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RewardDoesntEndWithNewToken",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SubmissionAlreadyJudged",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SubmissionDoesNotExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TaskClosed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TaskDoesNotExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TaskNotClosed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TaskNotOpen",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TaskNotTaken",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "applicationId",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "applicant",
+        "type": "address"
+      }
+    ],
+    "name": "ApplicationAccepted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "applicationId",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "metadata",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "nextToken",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "amount",
+            "type": "uint88"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct ITasks.Reward[]",
+        "name": "reward",
+        "type": "tuple[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "applicant",
+        "type": "address"
+      }
+    ],
+    "name": "ApplicationCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96[]",
+        "name": "increase",
+        "type": "uint96[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      }
+    ],
+    "name": "BudgetIncreased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "requestId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "explanation",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "CancelTaskRequested",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "extension",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "DeadlineExtended",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newMetadata",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      }
+    ],
+    "name": "MetadataEditted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum ITasks.RequestType",
+        "name": "requestType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "requestId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "RequestAccepted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum ITasks.RequestType",
+        "name": "requestType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "requestId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "by",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "RequestExecuted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "submissionId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "metadata",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "SubmissionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "submissionId",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum ITasks.SubmissionJudgement",
+        "name": "judgement",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "feedback",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "SubmissionReviewed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "TaskCancelled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "TaskCompleted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "metadata",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "deadline",
+        "type": "uint64"
+      },
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "tokenContract",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "amount",
+            "type": "uint96"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct ITasks.ERC20Transfer[]",
+        "name": "budget",
+        "type": "tuple[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      }
+    ],
+    "name": "TaskCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "applicationId",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "TaskTaken",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint16[]",
+        "name": "_applicationIds",
+        "type": "uint16[]"
+      }
+    ],
+    "name": "acceptApplications",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum ITasks.RequestType",
+        "name": "_requestType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_requestId",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "_execute",
+        "type": "bool"
+      }
+    ],
+    "name": "acceptRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_metadata",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "nextToken",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint88",
+            "name": "amount",
+            "type": "uint88"
+          }
+        ],
+        "internalType": "struct ITasks.Reward[]",
+        "name": "_reward",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "applyForTask",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "applicationId",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_explanation",
+        "type": "string"
+      }
+    ],
+    "name": "cancelTask",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "cancelTaskRequestId",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_metadata",
+        "type": "string"
+      }
+    ],
+    "name": "createSubmission",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "submissionId",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_metadata",
+        "type": "string"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_deadline",
+        "type": "uint64"
+      },
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "tokenContract",
+            "type": "address"
+          },
+          {
+            "internalType": "uint96",
+            "name": "amount",
+            "type": "uint96"
+          }
+        ],
+        "internalType": "struct ITasks.ERC20Transfer[]",
+        "name": "_budget",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "address",
+        "name": "_manager",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "applicant",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "nextToken",
+                "type": "bool"
+              },
+              {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+              },
+              {
+                "internalType": "uint88",
+                "name": "amount",
+                "type": "uint88"
+              }
+            ],
+            "internalType": "struct ITasks.Reward[]",
+            "name": "reward",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct ITasks.PreapprovedApplication[]",
+        "name": "_preapprove",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "createTask",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "disable",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_newMetadata",
+        "type": "string"
+      }
+    ],
+    "name": "editMetadata",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum ITasks.RequestType",
+        "name": "_requestType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_requestId",
+        "type": "uint8"
+      }
+    ],
+    "name": "executeRequest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_extension",
+        "type": "uint64"
+      }
+    ],
+    "name": "extendDeadline",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_executor",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fromTaskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_max",
+        "type": "uint256"
+      }
+    ],
+    "name": "getExecutingTasks",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "metadata",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "executorApplication",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "manager",
+            "type": "address"
+          },
+          {
+            "internalType": "enum ITasks.TaskState",
+            "name": "state",
+            "type": "uint8"
+          },
+          {
+            "internalType": "contract Escrow",
+            "name": "escrow",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "contract IERC20",
+                "name": "tokenContract",
+                "type": "address"
+              },
+              {
+                "internalType": "uint96",
+                "name": "amount",
+                "type": "uint96"
+              }
+            ],
+            "internalType": "struct ITasks.ERC20Transfer[]",
+            "name": "budget",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "applicant",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "accepted",
+                "type": "bool"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "nextToken",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "internalType": "uint88",
+                    "name": "amount",
+                    "type": "uint88"
+                  }
+                ],
+                "internalType": "struct ITasks.Reward[]",
+                "name": "reward",
+                "type": "tuple[]"
+              }
+            ],
+            "internalType": "struct ITasks.OffChainApplication[]",
+            "name": "applications",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "feedback",
+                "type": "string"
+              },
+              {
+                "internalType": "enum ITasks.SubmissionJudgement",
+                "name": "judgement",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct ITasks.Submission[]",
+            "name": "submissions",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "accepted",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "executed",
+                    "type": "bool"
+                  }
+                ],
+                "internalType": "struct ITasks.Request",
+                "name": "request",
+                "type": "tuple"
+              },
+              {
+                "internalType": "string",
+                "name": "explanation",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct ITasks.CancelTaskRequest[]",
+            "name": "cancelTaskRequests",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct ITasks.OffChainTask[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_manager",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fromTaskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_max",
+        "type": "uint256"
+      }
+    ],
+    "name": "getManagingTasks",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "metadata",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "executorApplication",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "manager",
+            "type": "address"
+          },
+          {
+            "internalType": "enum ITasks.TaskState",
+            "name": "state",
+            "type": "uint8"
+          },
+          {
+            "internalType": "contract Escrow",
+            "name": "escrow",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "contract IERC20",
+                "name": "tokenContract",
+                "type": "address"
+              },
+              {
+                "internalType": "uint96",
+                "name": "amount",
+                "type": "uint96"
+              }
+            ],
+            "internalType": "struct ITasks.ERC20Transfer[]",
+            "name": "budget",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "applicant",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "accepted",
+                "type": "bool"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "nextToken",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "internalType": "uint88",
+                    "name": "amount",
+                    "type": "uint88"
+                  }
+                ],
+                "internalType": "struct ITasks.Reward[]",
+                "name": "reward",
+                "type": "tuple[]"
+              }
+            ],
+            "internalType": "struct ITasks.OffChainApplication[]",
+            "name": "applications",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "feedback",
+                "type": "string"
+              },
+              {
+                "internalType": "enum ITasks.SubmissionJudgement",
+                "name": "judgement",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct ITasks.Submission[]",
+            "name": "submissions",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "accepted",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "executed",
+                    "type": "bool"
+                  }
+                ],
+                "internalType": "struct ITasks.Request",
+                "name": "request",
+                "type": "tuple"
+              },
+              {
+                "internalType": "string",
+                "name": "explanation",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct ITasks.CancelTaskRequest[]",
+            "name": "cancelTaskRequests",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct ITasks.OffChainTask[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTask",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "metadata",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "executorApplication",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "manager",
+            "type": "address"
+          },
+          {
+            "internalType": "enum ITasks.TaskState",
+            "name": "state",
+            "type": "uint8"
+          },
+          {
+            "internalType": "contract Escrow",
+            "name": "escrow",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "contract IERC20",
+                "name": "tokenContract",
+                "type": "address"
+              },
+              {
+                "internalType": "uint96",
+                "name": "amount",
+                "type": "uint96"
+              }
+            ],
+            "internalType": "struct ITasks.ERC20Transfer[]",
+            "name": "budget",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "applicant",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "accepted",
+                "type": "bool"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "nextToken",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "internalType": "uint88",
+                    "name": "amount",
+                    "type": "uint88"
+                  }
+                ],
+                "internalType": "struct ITasks.Reward[]",
+                "name": "reward",
+                "type": "tuple[]"
+              }
+            ],
+            "internalType": "struct ITasks.OffChainApplication[]",
+            "name": "applications",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "feedback",
+                "type": "string"
+              },
+              {
+                "internalType": "enum ITasks.SubmissionJudgement",
+                "name": "judgement",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct ITasks.Submission[]",
+            "name": "submissions",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "accepted",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "executed",
+                    "type": "bool"
+                  }
+                ],
+                "internalType": "struct ITasks.Request",
+                "name": "request",
+                "type": "tuple"
+              },
+              {
+                "internalType": "string",
+                "name": "explanation",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct ITasks.CancelTaskRequest[]",
+            "name": "cancelTaskRequests",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct ITasks.OffChainTask",
+        "name": "offchainTask",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "_taskIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "getTasks",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "metadata",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "executorApplication",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address",
+            "name": "creator",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "manager",
+            "type": "address"
+          },
+          {
+            "internalType": "enum ITasks.TaskState",
+            "name": "state",
+            "type": "uint8"
+          },
+          {
+            "internalType": "contract Escrow",
+            "name": "escrow",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "contract IERC20",
+                "name": "tokenContract",
+                "type": "address"
+              },
+              {
+                "internalType": "uint96",
+                "name": "amount",
+                "type": "uint96"
+              }
+            ],
+            "internalType": "struct ITasks.ERC20Transfer[]",
+            "name": "budget",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "applicant",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "accepted",
+                "type": "bool"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "nextToken",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                  },
+                  {
+                    "internalType": "uint88",
+                    "name": "amount",
+                    "type": "uint88"
+                  }
+                ],
+                "internalType": "struct ITasks.Reward[]",
+                "name": "reward",
+                "type": "tuple[]"
+              }
+            ],
+            "internalType": "struct ITasks.OffChainApplication[]",
+            "name": "applications",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "metadata",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "feedback",
+                "type": "string"
+              },
+              {
+                "internalType": "enum ITasks.SubmissionJudgement",
+                "name": "judgement",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct ITasks.Submission[]",
+            "name": "submissions",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "bool",
+                    "name": "accepted",
+                    "type": "bool"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "executed",
+                    "type": "bool"
+                  }
+                ],
+                "internalType": "struct ITasks.Request",
+                "name": "request",
+                "type": "tuple"
+              },
+              {
+                "internalType": "string",
+                "name": "explanation",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct ITasks.CancelTaskRequest[]",
+            "name": "cancelTaskRequests",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct ITasks.OffChainTask[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint96[]",
+        "name": "_increase",
+        "type": "uint96[]"
+      }
+    ],
+    "name": "increaseBudget",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      }
+    ],
+    "name": "refund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_submissionId",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum ITasks.SubmissionJudgement",
+        "name": "_judgement",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "_feedback",
+        "type": "string"
+      }
+    ],
+    "name": "reviewSubmission",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_applicationId",
+        "type": "uint16"
+      }
+    ],
+    "name": "takeTask",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "taskCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "taskStatistics",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "open",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "taken",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "successful",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

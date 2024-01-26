@@ -1,0 +1,56 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "uint8",
+        "name": "curveType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "managed",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint16",
+        "name": "durationWeeks",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint64",
+        "name": "startDate",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint128",
+        "name": "amount",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "initialUnlock",
+        "type": "uint128"
+      },
+      {
+        "internalType": "bool",
+        "name": "requiresSPT",
+        "type": "bool"
+      }
+    ],
+    "name": "vestingHash",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "vestingId",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  }
+]

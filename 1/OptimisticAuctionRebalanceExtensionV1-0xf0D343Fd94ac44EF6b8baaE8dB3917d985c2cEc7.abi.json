@@ -1,0 +1,936 @@
+[
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IBaseManager",
+            "name": "baseManager",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IAuctionRebalanceModuleV1",
+            "name": "auctionModule",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "useAssetAllowlist",
+            "type": "bool"
+          },
+          {
+            "internalType": "address[]",
+            "name": "allowedAssets",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct OptimisticAuctionRebalanceExtensionV1.AuctionExtensionParams",
+        "name": "_auctionParams",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_asset",
+        "type": "address"
+      }
+    ],
+    "name": "AllowedAssetAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_asset",
+        "type": "address"
+      }
+    ],
+    "name": "AllowedAssetRemoved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "AnyoneCallableUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "setToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_assertedBy",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "rules",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "_assertionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "_claimData",
+        "type": "bytes"
+      }
+    ],
+    "name": "AssertedClaim",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_caller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "CallerStatusUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bool",
+        "name": "isOpen",
+        "type": "bool"
+      }
+    ],
+    "name": "IsOpenUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "setToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint64",
+            "name": "liveness",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bondAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "identifier",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "contract OptimisticOracleV3Interface",
+            "name": "optimisticOracleV3",
+            "type": "address"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct OptimisticAuctionRebalanceExtensionV1.OptimisticRebalanceParams",
+        "name": "optimisticParams",
+        "type": "tuple"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "rules",
+        "type": "string"
+      }
+    ],
+    "name": "ProductSettingsUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "assertionID",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "proposalHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ProposalDeleted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract ISetToken",
+        "name": "setToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "quoteAsset",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "oldComponents",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "newComponents",
+        "type": "address[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "targetUnit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "priceAdapterName",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "priceAdapterConfigData",
+            "type": "bytes"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct AuctionRebalanceExtension.AuctionExecutionParams[]",
+        "name": "newComponentsAuctionParams",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "targetUnit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "priceAdapterName",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "priceAdapterConfigData",
+            "type": "bytes"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct AuctionRebalanceExtension.AuctionExecutionParams[]",
+        "name": "oldComponentsAuctionParams",
+        "type": "tuple[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rebalanceDuration",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "positionMultiplier",
+        "type": "uint256"
+      }
+    ],
+    "name": "RebalanceProposed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "UseAssetAllowlistUpdated",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "PROPOSAL_HASH_KEY",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "RULES_KEY",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_assets",
+        "type": "address[]"
+      }
+    ],
+    "name": "addAllowedAssets",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "anyoneCallable",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_assertionId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "assertionDisputedCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "assertionIdToProposalHash",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "assertionIds",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assertionId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "assertedTruthfully",
+        "type": "bool"
+      }
+    ],
+    "name": "assertionResolvedCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "assetAllowlist",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "auctionModule",
+    "outputs": [
+      {
+        "internalType": "contract IAuctionRebalanceModuleV1",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "callAllowList",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllowedAssets",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "isOpen",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "manager",
+    "outputs": [
+      {
+        "internalType": "contract IBaseManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "productSettings",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint64",
+            "name": "liveness",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bondAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "identifier",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "contract OptimisticOracleV3Interface",
+            "name": "optimisticOracleV3",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct OptimisticAuctionRebalanceExtensionV1.OptimisticRebalanceParams",
+        "name": "optimisticParams",
+        "type": "tuple"
+      },
+      {
+        "internalType": "string",
+        "name": "rules",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "_quoteAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_oldComponents",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_newComponents",
+        "type": "address[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "targetUnit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "priceAdapterName",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "priceAdapterConfigData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct AuctionRebalanceExtension.AuctionExecutionParams[]",
+        "name": "_newComponentsAuctionParams",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "targetUnit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "priceAdapterName",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "priceAdapterConfigData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct AuctionRebalanceExtension.AuctionExecutionParams[]",
+        "name": "_oldComponentsAuctionParams",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rebalanceDuration",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_positionMultiplier",
+        "type": "uint256"
+      }
+    ],
+    "name": "proposeRebalance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_assets",
+        "type": "address[]"
+      }
+    ],
+    "name": "removeAllowedAssets",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "setAnyoneBid",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_bidders",
+        "type": "address[]"
+      },
+      {
+        "internalType": "bool[]",
+        "name": "_statuses",
+        "type": "bool[]"
+      }
+    ],
+    "name": "setBidderStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint64",
+            "name": "liveness",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bondAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "identifier",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "contract OptimisticOracleV3Interface",
+            "name": "optimisticOracleV3",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct OptimisticAuctionRebalanceExtensionV1.OptimisticRebalanceParams",
+        "name": "_optimisticParams",
+        "type": "tuple"
+      },
+      {
+        "internalType": "string",
+        "name": "_rules",
+        "type": "string"
+      }
+    ],
+    "name": "setProductSettings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_raiseTargetPercentage",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRaiseTargetPercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "setToken",
+    "outputs": [
+      {
+        "internalType": "contract ISetToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "_quoteAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_oldComponents",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_newComponents",
+        "type": "address[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "targetUnit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "priceAdapterName",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "priceAdapterConfigData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct AuctionRebalanceExtension.AuctionExecutionParams[]",
+        "name": "_newComponentsAuctionParams",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "targetUnit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "priceAdapterName",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "priceAdapterConfigData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct AuctionRebalanceExtension.AuctionExecutionParams[]",
+        "name": "_oldComponentsAuctionParams",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "bool",
+        "name": "_shouldLockSetToken",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rebalanceDuration",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_positionMultiplier",
+        "type": "uint256"
+      }
+    ],
+    "name": "startRebalance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unlock",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_status",
+        "type": "bool"
+      }
+    ],
+    "name": "updateAnyoneCallable",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "_callers",
+        "type": "address[]"
+      },
+      {
+        "internalType": "bool[]",
+        "name": "_statuses",
+        "type": "bool[]"
+      }
+    ],
+    "name": "updateCallerStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_isOpen",
+        "type": "bool"
+      }
+    ],
+    "name": "updateIsOpen",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "_useAssetAllowlist",
+        "type": "bool"
+      }
+    ],
+    "name": "updateUseAssetAllowlist",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "useAssetAllowlist",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

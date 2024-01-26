@@ -1,0 +1,489 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "_decimals",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "MonthNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "Rate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "BodyForCalc",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "Interests",
+        "type": "uint256"
+      }
+    ],
+    "name": "InterestsAccrued",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "AMOUNT_BONUS",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "AMOUNT_STEP",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "BASE_MAX",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "BASE_START",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "BASE_STEP",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DECIMALS10",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "INTEREST_ACCRUE_PERIOD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PERCENT_DENOMINATOR",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_deposit",
+        "type": "tuple"
+      }
+    ],
+    "name": "accrueInterests",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "increment",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_deposit",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_monthCount",
+        "type": "uint256"
+      }
+    ],
+    "name": "calcInterests",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "increment",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_deposit",
+        "type": "tuple"
+      }
+    ],
+    "name": "checkOpen",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "ok",
+        "type": "bool"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_currMonth",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRateForPeriodAndAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "_deposit",
+        "type": "tuple"
+      }
+    ],
+    "name": "payInterestsToBody",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "body",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "amountParams",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "addressParams",
+            "type": "address[]"
+          },
+          {
+            "internalType": "uint8",
+            "name": "depositModelIndex",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Deposit",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
