@@ -1,0 +1,38 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "dealAddress",
+        "type": "address"
+      }
+    ],
+    "name": "DealInitiated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "etherAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "firnAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lockupDays",
+        "type": "uint256"
+      }
+    ],
+    "name": "initiateDeal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

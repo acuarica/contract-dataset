@@ -1,0 +1,418 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "BorrowCapReached",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "BorrowPaused",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ChangeNotAuthorized",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "CollectInterestPaused",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ComptrollerMismatch",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ExcessRefundFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "errorCode",
+        "type": "uint256"
+      }
+    ],
+    "name": "GetAccountSnapshotFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InitializationFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "errorCode",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "InsufficientShortfall",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidInput",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidMarket",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidTopUpLimit",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LiquidateError",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "minSeizedValue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidatedValueTotal",
+        "type": "uint256"
+      }
+    ],
+    "name": "LiquidateSeizeBellowMinValue",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LiquidateSeizeTooLittle",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LiquidateSeizeTooMuch",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MarketAlreadyAdded",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MarketNotListed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MintPaused",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OnlyAdminCanUnpause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PayInterestPaused",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PriceError",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SameMarket",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SeizeFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SeizePaused",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TopUpFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TopUpLimitExceeded",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TopUpZero",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferPaused",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Unauthorized",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "WrongMarketType",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "error",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "info",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "detail",
+        "type": "uint256"
+      }
+    ],
+    "name": "Failure",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oldAdmin",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "NewAdmin",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oldImplementation",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "NewImplementation",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oldPendingAdmin",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newPendingAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "NewPendingAdmin",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oldPendingImplementation",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newPendingImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "NewPendingImplementation",
+    "type": "event"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "inputs": [],
+    "name": "_acceptAdmin",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_acceptImplementation",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newPendingAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "_setPendingAdmin",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newPendingImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "_setPendingImplementation",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "comptrollerImplementation",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pendingAdmin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pendingComptrollerImplementation",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "rate",
+    "inputs": [
+      {
+        "name": "_asset",
+        "type": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ]
+  }
+]

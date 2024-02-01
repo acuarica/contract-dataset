@@ -1,0 +1,89 @@
+[
+  {
+    "inputs": [],
+    "name": "LiquidityPoolAddressNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "poolId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes",
+                "name": "extraData",
+                "type": "bytes"
+              }
+            ],
+            "internalType": "struct PositionDescriptor",
+            "name": "descriptor",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "liquidity",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Asset[]",
+            "name": "minOutput",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct IDecreasePositionEvaluator.DecreasePositionRequest",
+        "name": "_request",
+        "type": "tuple"
+      }
+    ],
+    "name": "evaluate",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "target",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes",
+            "name": "payload",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct Command[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

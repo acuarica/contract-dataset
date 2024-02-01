@@ -1,0 +1,322 @@
+[
+  {
+    "inputs": [],
+    "name": "AlreadyUpToDate",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum TokenPermission",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "CannotRecognizeTokenPermission",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "CannotSetPermissionToNone",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ProtocolMustNotBeEmptyString",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "enum TokenPermission",
+        "name": "required",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum TokenPermission",
+        "name": "actual",
+        "type": "uint8"
+      }
+    ],
+    "name": "TokenLevelInsufficient",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "UnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "protocol",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "supported",
+        "type": "bool"
+      }
+    ],
+    "name": "OperatorSupportChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "protocol",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "supported",
+        "type": "bool"
+      }
+    ],
+    "name": "ProtocolSupportChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "supported",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum TokenPermission",
+        "name": "permission",
+        "type": "uint8"
+      }
+    ],
+    "name": "TokenSupportChanged",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "enum TokenPermission",
+        "name": "perm",
+        "type": "uint8"
+      }
+    ],
+    "name": "enforceTokenHasPermission",
+    "outputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      }
+    ],
+    "name": "getOperatorStatus",
+    "outputs": [
+      {
+        "internalType": "enum Status",
+        "name": "operatorStatus",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum Status",
+        "name": "protocolStatus",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "protocol",
+        "type": "string"
+      }
+    ],
+    "name": "getProtocolEvaluator",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "protocol",
+        "type": "string"
+      }
+    ],
+    "name": "getProtocolStatus",
+    "outputs": [
+      {
+        "internalType": "enum Status",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "getTokenSupport",
+    "outputs": [
+      {
+        "internalType": "enum Status",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum TokenPermission",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "protocol",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "source",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "supported",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct WhitelistingAddressRecord[]",
+        "name": "operators",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "updateOperatorsSupport",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "protocol",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "adapter",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "supported",
+        "type": "bool"
+      }
+    ],
+    "name": "updateProtocolSupport",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "source",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "supported",
+            "type": "bool"
+          },
+          {
+            "internalType": "enum TokenPermission",
+            "name": "permission",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct WhitelistingTokenRecord[]",
+        "name": "tokens",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "updateTokensSupport",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

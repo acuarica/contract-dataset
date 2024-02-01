@@ -1,0 +1,376 @@
+[
+  {
+    "inputs": [],
+    "name": "DirectFundingDisallowed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ETHSendingFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EmptyWithdrawDisallowed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "expectedETHPortion",
+        "type": "uint256"
+      }
+    ],
+    "name": "IncorrectOrMissingAcceptorETH",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotAcceptor",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotInitiator",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SwapCompleteOrDoesNotExist",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TwoWayEthPortionsDisallowed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroAddressDisallowed",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "swapId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "acceptor",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "initiatorNftContract",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "acceptorNftContract",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "initiator",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "initiatorTokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "acceptor",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptorTokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "initiatorETHPortion",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptorETHPortion",
+            "type": "uint256"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct IERC721Swapper.Swap",
+        "name": "swap",
+        "type": "tuple"
+      }
+    ],
+    "name": "SwapComplete",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "swapId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "acceptor",
+        "type": "address"
+      }
+    ],
+    "name": "SwapInitiated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "swapId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      }
+    ],
+    "name": "SwapRemoved",
+    "type": "event"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "balances",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_swapId",
+        "type": "uint256"
+      }
+    ],
+    "name": "completeSwap",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_swapId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getSwapStatus",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "initiatorOwnsToken",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "acceptorOwnsToken",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "initiatorApprovalsSet",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "acceptorApprovalsSet",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct IERC721Swapper.SwapStatus",
+        "name": "swapStatus",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_initiatorNftContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_acceptorNftContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_acceptor",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_acceptorETHPortion",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_initiatorTokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_acceptorTokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "initiateSwap",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_swapId",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeSwap",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "swapId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "swaps",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "initiatorNftContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "acceptorNftContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "initiatorTokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "acceptor",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptorTokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "initiatorETHPortion",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptorETHPortion",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

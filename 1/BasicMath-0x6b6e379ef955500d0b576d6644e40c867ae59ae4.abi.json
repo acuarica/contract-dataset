@@ -1,0 +1,60 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_a",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_b",
+        "type": "uint256"
+      }
+    ],
+    "name": "adder",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "sum",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "error",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_a",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_b",
+        "type": "uint256"
+      }
+    ],
+    "name": "subtractor",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "difference",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "error",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  }
+]

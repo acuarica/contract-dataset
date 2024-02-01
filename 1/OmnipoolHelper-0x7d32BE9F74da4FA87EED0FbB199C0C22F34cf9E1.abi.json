@@ -1,0 +1,129 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "controllerAddress_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "omnipools",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "addr",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "symbol",
+                "type": "string"
+              },
+              {
+                "internalType": "uint8",
+                "name": "decimals",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct IOmnipoolHelper.TokenData",
+            "name": "underlying",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "symbol",
+                "type": "string"
+              },
+              {
+                "internalType": "uint8",
+                "name": "decimals",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct IOmnipoolHelper.TokenData",
+            "name": "lpToken",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "exchangeRate",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "target",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "allocated",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct IOmnipoolHelper.LamData[]",
+            "name": "lams",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "bool",
+            "name": "rebalancingRewardActive",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalUnderlying",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "rewardManager",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct IOmnipoolHelper.OmnipoolInfo[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
